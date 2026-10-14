@@ -1,0 +1,15 @@
+LICENSING STATUS: LOCAL REVIEW ONLY — NOT CLEARED FOR DISTRIBUTION
+
+MIT is the proposed license for the original project code, tests, fixtures,
+and documentation. It has NOT yet been applied: the inspected source manifests
+declare publish=false and omit a license, and ownership/redistribution rights
+have not been established. This file does not grant rights to source-derived
+code. The package is intentionally not assigned an SPDX license identifier.
+
+Before publication, the verified rights holder must authorize MIT for all
+source-derived portions and identify the correct copyright holder(s). Then
+replace this notice with the full MIT text in docs/LICENSE-MIT-PROPOSED.txt,
+complete its copyright line, and update docs/PUBLICATION.md.
+
+No rights are offered in excluded firmware, vendor materials, device evidence,
+drivers, binaries, or private engineering artifacts. They are not distributed.

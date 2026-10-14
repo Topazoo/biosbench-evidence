@@ -1,0 +1,6 @@
+biosbench_boot_inventory_version=1
+authenticated=false
+atomic=false
+count=0
+kind=memory_map
+complete=true

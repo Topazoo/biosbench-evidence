@@ -1,0 +1,13 @@
+{
+  "BFLA001.TXT": "df724fdc79aa93d9a86a8e736cbcddf8561a71079718641111a51136ab5b47fb",
+  "BIMG001.TXT": "616e23c2f19b134ec9fbba245a7d848662f75f637b3c4bef2758f2325de7365f",
+  "BMAP001.TXT": "ae1e36b4228c7abbd4c69c6019c55aef8e51e73efc31e0f4fbbdbfff889f88db",
+  "after.snapshot": "bfe5596b6e45a33b328deb663b9dbd64b650fb150bad2612b7fe6b4cb4345017",
+  "before.snapshot": "6ec43280b2f8d19b659656b6323e8faa899afbe754de09c909e061918f2be4ea",
+  "complete-report.txt": "43a85422c5cbfd57943a75954879065f70bd01f623331c0ba46349cda8128842",
+  "malformed-inventory.txt": "234e5d6f4faa8dbf0482b8f967d7f6977cbf0d80d3bdb25d77faae0c12a05fc5",
+  "malformed-report.txt": "07cbaff6fa8c2aba1f18fed4a3cd334a6ffd47c91e65d4c70a8c33b2f34d7a2f",
+  "missing-reference-report.txt": "be7124bb620c7d348fd1878b69b9c3ffcec2728766a5ca5b7d8d526f97b38794",
+  "partial-save-report.txt": "0ee7e9f20c7b6f6d17ec19444c9363869cea528bd844ff92f769cb7b2df9a71e",
+  "plan.json": "0a2874bd7d05b25a7a56425b3957040a05b68f3e8bdfcca2f2fe6bc2c97f1504"
+}

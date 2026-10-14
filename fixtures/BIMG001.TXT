@@ -1,0 +1,7 @@
+biosbench_boot_inventory_version=1
+authenticated=false
+atomic=false
+count=0
+kind=loaded_images
+failed_observations=0
+enumeration_complete=true

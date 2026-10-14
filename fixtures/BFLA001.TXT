@@ -1,0 +1,1 @@
+Synthetic opaque flash-survey payload. Structure is unsupported.

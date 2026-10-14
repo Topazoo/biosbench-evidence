@@ -1,0 +1,2 @@
+biosbench_boot_inventory_version=1
+kind=memory_map
