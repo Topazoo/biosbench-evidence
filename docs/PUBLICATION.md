@@ -1,22 +1,30 @@
-# Remaining publication prerequisites
+# Publication status and remaining steps
 
-1. Establish the actual authors/rights holders of each source-derived component
-   in PROVENANCE.md, including any copied third-party portions. Obtain explicit
-   redistribution and MIT licensing authorization. Complete the copyright line
-   and replace the provisional LICENSE notice; do not publish it as MIT today.
-2. Review the exact allowlisted source archive for privacy and license clearance.
-   The private audit directory is outside the repository and must stay private.
-   Confirm that excluded device evidence, board-specific analysis, binaries,
-   images, offsets, and private identifiers have not been reintroduced.
-3. Decide whether this deliberately narrower portable API is an acceptable first
-   release. Flash-survey semantics and board extensions are not validated. A full
-   compatibility release requires separately reviewed generic adapters and tests.
-4. Execute the committed CI matrix on Linux and Windows using Python 3.12.14.
-   Local Windows tests do not establish Linux runtime validation. Review archive
-   reproducibility and any additional release-specific checks.
-5. Choose the repository account/name, establish a security contact, and get
-   explicit authorization to publish that reviewed version. No account access,
-   remote repository creation, uploads, or GitHub publication was authorized here.
+Peter Swanson confirmed authority over the included project components and
+authorized MIT licensing and public GitHub publication on 2026-10-14. The root
+LICENSE is the effective MIT license. The former proposal notice was removed.
 
-These are release gates, not requests to change or pause ongoing engineering.
-The current local artifact is intended for code review and licensing decisions.
+The local source is prepared for publication; no remote has been created or
+pushed by this task. Remaining steps:
+
+1. Obtain the verified existing authenticated GitHub route and resolve the
+   destination account/repository. Access is currently blocked; no credentials,
+   tokens, grants, or duplicate authentication setup should be created here.
+2. Review the exact commit/archive intended for release. Keep the private audit
+   and approval records outside the repository. Local checks cover the explicit
+   33-file source allowlist, privacy patterns, and synthetic fixture reproduction.
+3. Execute the configured Linux/Windows CI matrix with Python 3.12.14 when GitHub
+   access is available. Local Windows execution does not prove Linux or hosted
+   CI results. Establish a private security-reporting contact before launch.
+4. Present a concrete repository/branch-protection proposal with the actual
+   repository, branch, check names, review rules, bypass permissions, and any
+   account-plan limitations. Obtain action-time approval before changing these
+   security settings; none have been changed or preapproved by this task.
+5. Publish the reviewed version through the verified route, then verify remote
+   visibility, the exact pushed commit, CI results, and approved protections.
+
+The first release intentionally supports a narrower portable API than the
+engineering application. Flash-survey payload structure and board extensions
+remain unsupported; this limitation is documented rather than a licensing block.
+No firmware-safety, full semantic-compatibility, or physical-validation claim is
+made. Ongoing engineering workspaces are outside the publication workflow.

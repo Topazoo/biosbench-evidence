@@ -15,7 +15,7 @@ SOURCE_FILES = (
     "tests/test_evidence.py", "tests/test_inventory.py",
     "tools/generate_fixtures.py", "tools/check_repository.py", "tools/build_archive.py",
     "docs/FORMATS.md", "docs/FAULTS.md", "docs/PROVENANCE.md", "docs/PUBLICATION.md",
-    "docs/LICENSE-MIT-PROPOSED.txt", "docs/VALIDATION.md",
+    "docs/VALIDATION.md",
 )
 
 

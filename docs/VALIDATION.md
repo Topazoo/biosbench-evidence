@@ -13,7 +13,7 @@ python tools/build_archive.py
 ```
 
 Executed successfully on 2026-10-14: **22 unittest test methods**, including
-128 individual one-bit corruption cases; a **34-file allowlist/format/source
+128 individual one-bit corruption cases; a **33-file allowlist/format/source
 syntax check**; and exact reproduction of all **12 synthetic fixture files**.
 The complete-bundle CLI smoke check returned three matching byte links,
 validated generic inventories, explicitly unsupported flash-survey structure,
@@ -21,8 +21,9 @@ and unverified authenticity/save completion.
 
 The final task handoff records archive reproducibility and archive SHA-256.
 The CI matrix is configured but has not been run on GitHub. Linux execution,
-full original-report semantic compatibility, hardware validation, ownership,
-and final license clearance are not established by these checks.
+full original-report semantic compatibility, and hardware validation are not
+established by these checks. MIT authorization is recorded separately in
+PROVENANCE.md; tests are not evidence of ownership.
 
 The archive includes only allowlisted text source, tests, docs, configuration,
 and deterministic synthetic fixtures. It excludes Git history, bytecode,
