@@ -7,7 +7,7 @@ and its standard library are the only runtime requirements.
 
 Licensed under [MIT](LICENSE), copyright 2026 Peter Swanson. See the scoped
 [source and dependency audit](docs/PROVENANCE.md) and
-[publication record](docs/PUBLICATION.md). 
+[publication record](docs/PUBLICATION.md).
 
 ## What it checks
 
