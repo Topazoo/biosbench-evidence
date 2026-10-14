@@ -3,10 +3,11 @@
 Local expansion: 34 Python test methods pass on Windows and Linux, including
 192 browser-buffer one-bit cases and HII/IFR truncation/shape/boundary tests.
 The expanded package has 41 allowlisted text files and 16 reproducible synthetic
-fixture files. Hosted CI below concerns the previously published scope only.
+fixture files. The expanded scope also passed hosted Linux/Windows checks:
+https://github.com/Topazoo/biosbench-evidence/actions/runs/38524718461
 
-This file records local synthetic checks only. No collector, driver, firmware,
-owner workspace test, account operation, or physical settings trial is involved.
+This file records local and hosted synthetic checks. No collector, driver, firmware,
+owner workspace test, or physical settings trial is involved.
 
 Local environment: Windows, Python 3.12.14.
 Commands to reproduce from the repository root:
@@ -17,7 +18,7 @@ python tools/check_repository.py
 python tools/build_archive.py
 ```
 
-Executed successfully on 2026-10-14: **22 unittest test methods**, including
+Initial scope executed successfully on 2026-10-14: **22 unittest test methods**, including
 128 individual one-bit corruption cases; a **33-file allowlist/format/source
 syntax check**; and exact reproduction of all **12 synthetic fixture files**.
 The complete-bundle CLI smoke check returned three matching byte links,
