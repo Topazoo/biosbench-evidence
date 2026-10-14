@@ -20,8 +20,11 @@ validated generic inventories, explicitly unsupported flash-survey structure,
 and unverified authenticity/save completion.
 
 The final task handoff records archive reproducibility and archive SHA-256.
-The CI matrix is configured but has not been run on GitHub. Linux execution,
-full original-report semantic compatibility, and hardware validation are not
+Initial hosted run 38520070956 passed on Linux/Python 3.12.14. Windows setup
+failed because that Python patch version has no Windows build in the Actions
+manifest. The matrix now pins Python 3.12.10, verified available for Linux and
+Windows; the latest run is linked from the repository Actions tab.
+Full original-report semantic compatibility and hardware validation are not
 established by these checks. MIT authorization is recorded separately in
 PROVENANCE.md; tests are not evidence of ownership.
 

@@ -16,7 +16,8 @@ Hash declarations live in unauthenticated input. An attacker can replace a file
 and its digest together. Structure checks cannot prove provenance, atomicity,
 freshness, successful save finalization, real hardware state, or firmware safety.
 
-No security contact or hosted issue tracker exists for this local candidate.
-Before publication, establish a private reporting contact. Never attach real
+The repository is hosted at https://github.com/Topazoo/biosbench-evidence.
+A private security-reporting channel is not yet enabled; enabling GitHub private
+vulnerability reporting is proposed for owner approval. Never attach real
 device reports, private paths, identifiers, settings dumps, binaries, or captured
 firmware to public issues; supply a minimal synthetic reproducer instead.

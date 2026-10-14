@@ -1,30 +1,50 @@
-# Publication status and remaining steps
+# Publication status and protection proposal
 
-Peter Swanson confirmed authority over the included project components and
-authorized MIT licensing and public GitHub publication on 2026-10-14. The root
-LICENSE is the effective MIT license. The former proposal notice was removed.
+Public repository: https://github.com/Topazoo/biosbench-evidence
 
-The local source is prepared for publication; no remote has been created or
-pushed by this task. Remaining steps:
+Peter Swanson authorized public publication and MIT licensing on 2026-10-14.
+The reviewed history was pushed using his existing authenticated GitHub route.
+No credentials, grants, global Git/auth settings, or engineering files changed.
 
-1. Obtain the verified existing authenticated GitHub route and resolve the
-   destination account/repository. Access is currently blocked; no credentials,
-   tokens, grants, or duplicate authentication setup should be created here.
-2. Review the exact commit/archive intended for release. Keep the private audit
-   and approval records outside the repository. Local checks cover the explicit
-   33-file source allowlist, privacy patterns, and synthetic fixture reproduction.
-3. Execute the configured Linux/Windows CI matrix with Python 3.12.14 when GitHub
-   access is available. Local Windows execution does not prove Linux or hosted
-   CI results. Establish a private security-reporting contact before launch.
-4. Present a concrete repository/branch-protection proposal with the actual
-   repository, branch, check names, review rules, bypass permissions, and any
-   account-plan limitations. Obtain action-time approval before changing these
-   security settings; none have been changed or preapproved by this task.
-5. Publish the reviewed version through the verified route, then verify remote
-   visibility, the exact pushed commit, CI results, and approved protections.
+## Hosted validation
+
+The first run passed on Linux but Windows could not install Python 3.12.14.
+The corrected workflow pins Python 3.12.10, available on both platforms, and
+runs unit tests, the explicit file/privacy/fixture checks, and archive creation.
+See the Actions tab for the latest commit-specific result. Local tests use
+Python 3.12.14; they are distinct from hosted results.
+
+## Inspected settings and proposed changes
+
+Inspection on 2026-10-14 found public visibility, default branch main, no branch
+protection or rulesets, and one collaborator: the owner with admin access.
+Secret scanning and push protection are already enabled. Workflow default token
+permissions are read-only and workflow approval of pull requests is disabled.
+Private vulnerability reporting is disabled. All three merge methods are enabled.
+
+No protection or security setting has been changed. The following concrete
+proposal requires separate action-time owner approval:
+
+- Protect main, including administrators, with no force pushes or branch deletion.
+- Require pull requests and resolved review conversations.
+- Require the GitHub Actions checks named test (ubuntu-latest) and
+  test (windows-latest), with the branch up to date before merging.
+- Require linear history; allow squash merges only, disabling merge commits and
+  rebase merges.
+- Use zero required approving reviews while the owner is the sole collaborator:
+  the owner cannot approve their own pull request. Require one approval and
+  dismiss stale approvals once a second reviewer is explicitly appointed.
+- Enable private vulnerability reporting to provide a private security channel.
+- Keep existing secret scanning, push protection, read-only workflow permissions,
+  and prohibition on workflow pull-request approval unchanged.
+
+The exact settings and check identities must be re-read at application time.
+This proposal does not authorize applying them or adding collaborators.
+
+## Evidence limits
 
 The first release intentionally supports a narrower portable API than the
 engineering application. Flash-survey payload structure and board extensions
-remain unsupported; this limitation is documented rather than a licensing block.
-No firmware-safety, full semantic-compatibility, or physical-validation claim is
-made. Ongoing engineering workspaces are outside the publication workflow.
+remain unsupported. No firmware-safety, full semantic-compatibility, or physical
+validation claim is made. Private audit and approval records remain outside the
+repository and archive. Ongoing engineering workspaces remain out of scope.

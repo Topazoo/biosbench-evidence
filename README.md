@@ -6,8 +6,8 @@ links, validates generic boot inventories, and compares every snapshot byte
 against an explicit plan. Python 3.12+, standard library only.
 
 Licensed under the [MIT License](LICENSE), copyright 2026 Peter Swanson.
-Public GitHub publication is authorized and pending authenticated access and
-the remaining [publication checks](docs/PUBLICATION.md).
+Source: [Topazoo/biosbench-evidence](https://github.com/Topazoo/biosbench-evidence).
+See [publication status and protection proposal](docs/PUBLICATION.md).
 
 Useful for support tooling, lab automation, and tests that must distinguish
 missing evidence, partial saves, corrupt input, and unchanged snapshots.
