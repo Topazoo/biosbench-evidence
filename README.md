@@ -1,6 +1,7 @@
 # BiosBench Evidence
 
-Offline Python library and CLI for checking saved firmware evidence. Use it in
+Python library and CLI for understanding and checking saved firmware evidence.
+The current release supports offline inspection and comparison. Use it in
 support tooling, lab automation, or regression tests to distinguish missing
 inputs, partial saves, invalid evidence, and exact byte matches. Python 3.12+
 and its standard library are the only runtime requirements.
@@ -19,9 +20,29 @@ Licensed under [MIT](LICENSE), copyright 2026 Peter Swanson. See the scoped
 | HII package lists | Package/IFR framing, scope balance, and a limited declaration subset. |
 | Browser buffers | Exact declared buffer sets and baseline or staged bytes; no persistent-variable attributes. |
 
-There is no collector, driver, firmware writer, or hardware access. Unknown
-report fields and HII opcode bodies remain opaque. Flash-survey payload
-structure is unsupported even when its byte link matches.
+The current package does not include a collector, driver, firmware writer, or
+live hardware access. This describes today's implementation, not a permanent
+restriction on the project's scope or a promise of future capabilities.
+Any future component needs its own implementation, documented evidence, and
+validation before it can be described as supported.
+
+Unknown report fields and HII opcode bodies remain opaque. Flash-survey payload
+structure is unsupported even when its byte link matches. See the
+[format and component reference](docs/FORMATS.md#format-and-component-reference)
+for supported versions, inputs, outputs, and known unknowns.
+
+## What the evidence establishes
+
+| Evidence level | Current public package | Interpretation |
+| --- | --- | --- |
+| Decoded structure | Bounded report/inventory parsing and selected HII/IFR framing and declarations. | Supplied bytes meet the implemented structural rules; firmware behavior and setting meanings remain unverified. |
+| Exact byte comparison | Digest links and snapshot/browser comparisons, exercised with synthetic fixtures. | Selected bytes agree with a digest, baseline, or explicit plan; this does not establish authenticity or effective state. |
+| Emulator observation | No emulator validation is recorded for this package. | An emulator result would describe that environment and scenario; it would not by itself validate a physical machine. |
+| Physical validation | No physical settings trial is recorded for this package. | Hardware behavior, persistence, and safety are not established by these checks. |
+
+These levels describe different kinds of evidence. A successful parser or byte
+comparison does not become an emulator or physical result. See
+[test coverage and remaining unknowns](docs/VALIDATION.md#coverage-and-known-unknowns).
 
 ## Quick start
 

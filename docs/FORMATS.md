@@ -1,7 +1,32 @@
 # Supported saved formats
 
-All text uses printable ASCII and LF; CRLF, NUL, and non-ASCII bytes are rejected.
-A final LF is optional. These are file formats, not hardware interfaces.
+The report, inventory, and snapshot text formats below use printable ASCII and
+LF; CRLF, NUL, and non-ASCII bytes are rejected. A final LF is optional.
+These are file formats, not hardware interfaces. Browser-case JSON and binary
+HII inputs have separate rules in [EXPANSION.md](EXPANSION.md).
+
+## Format and component reference
+
+This table describes the currently published Python components. Format version
+numbers identify accepted inputs; they are not BIOS vendor/version support
+claims. No board or firmware release compatibility matrix is established here.
+
+| Format / component | Supported version or subset | Input and entry point | Output / known unknowns |
+| --- | --- | --- | --- |
+| Saved report / `core.py` | Exact `BiosBench \| Rust diagnostics v1` header; generic envelope and companion declarations. | ASCII bytes to `parse_report`; selected file to CLI `report`. | Library field mapping; CLI field count and `parsed`. Unknown fields remain uninterpreted; no board semantics. |
+| Companion bundle / `core.py` | Three declared companion kinds and exact SHA-256 byte links. | Report and explicitly supplied companion bytes to `validate_bundle`; CLI `bundle`. | Per-companion link/structure results and overall state. Save completion, authenticity, and atomicity remain unverified. |
+| Memory inventory / `inventory.py` | `biosbench_boot_inventory_version=1`, `kind=memory_map`. | Selected `BMAPnnn.TXT` through bundle validation. | Region count and described-byte total after span checks; no verification of installed or usable RAM. |
+| Image inventory / `inventory.py` | Version 1, `kind=loaded_images`. | Selected `BIMGnnn.TXT` through bundle validation. | Image and failure counts; structurally valid failures remain failures. Paths and addresses are not accessed. |
+| Flash survey / bundle byte link | Payload structure unsupported. | Selected `BFLAnnn.TXT` through bundle validation. | Digest agreement only; no decoded flash layout or flash safety result. |
+| Supplied snapshot / `core.py` | Exact `BiosBench supplied snapshot v1` five-line format. | `parse_snapshot`, then `compare_snapshots` or `compare_set`; CLI `compare` with optional JSON edit array. | Exact identity, attributes, length, and byte comparison. No setting semantics, dependency discovery, or persistence claim. |
+| HII/IFR / `hii.py` | Package-list framing, forms packages, balanced IFR scopes, form/form-set and buffer/name-value/EFI store declaration shapes. No full UEFI revision conformance claim. | Supplied binary bytes to `inspect_hii`; CLI `hii`, optionally strict hex with `--hex`. | Counts and package-type totals only after full validation. Other bodies are opaque; no expression evaluation or callbacks. |
+| Browser buffers / `browser.py` | Case JSON integer `version=1`; exact declared buffer sets in baseline or staged mode. | `BrowserBuffer`, `BrowserPlan`, `verify_browser`; CLI `browser`, optionally `--staged`. | Per-store `unchanged` or `matched`; CLI also identifies the phase. No persistent-variable attributes or provider/session validation. |
+
+The CLI emits JSON and exit codes; it does not produce new device captures.
+See [README result meanings](../README.md#interpret-results) and
+[HII/browser bounds and APIs](EXPANSION.md). Published source adaptations are
+described in [PROVENANCE.md](PROVENANCE.md) and [EXPANSION.md](EXPANSION.md);
+this table does not imply that excluded original components are shipped.
 
 ## Report envelope
 
