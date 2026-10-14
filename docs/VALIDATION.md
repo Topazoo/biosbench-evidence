@@ -1,7 +1,13 @@
 # Validation record
 
-This file records local synthetic checks only. No collector, driver, firmware,
-owner workspace test, account operation, or physical settings trial is involved.
+Local expansion: 34 Python test methods pass on Windows and Linux, including
+192 browser-buffer one-bit cases and HII/IFR truncation/shape/boundary tests.
+The expanded package has 41 allowlisted text files and 16 reproducible synthetic
+fixture files. The expanded scope also passed hosted Linux/Windows checks:
+https://github.com/Topazoo/biosbench-evidence/actions/runs/38524718461
+
+This file records local and hosted synthetic checks. No collector, driver, firmware,
+owner workspace test, or physical settings trial is involved.
 
 Local environment: Windows, Python 3.12.14.
 Commands to reproduce from the repository root:
@@ -12,7 +18,7 @@ python tools/check_repository.py
 python tools/build_archive.py
 ```
 
-Executed successfully on 2026-10-14: **22 unittest test methods**, including
+Initial scope executed successfully on 2026-10-14: **22 unittest test methods**, including
 128 individual one-bit corruption cases; a **33-file allowlist/format/source
 syntax check**; and exact reproduction of all **12 synthetic fixture files**.
 The complete-bundle CLI smoke check returned three matching byte links,
@@ -25,8 +31,7 @@ failed because that Python patch version has no Windows build in the Actions
 manifest. The matrix now pins Python 3.12.10, verified available for Linux and
 Windows; the latest run is linked from the repository Actions tab.
 Full original-report semantic compatibility and hardware validation are not
-established by these checks. MIT authorization is recorded separately in
-PROVENANCE.md; tests are not evidence of ownership.
+established by these checks. Source and dependency provenance is recorded in PROVENANCE.md.
 
 The archive includes only allowlisted text source, tests, docs, configuration,
 and deterministic synthetic fixtures. It excludes Git history, bytecode,

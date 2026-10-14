@@ -17,7 +17,6 @@ and its digest together. Structure checks cannot prove provenance, atomicity,
 freshness, successful save finalization, real hardware state, or firmware safety.
 
 The repository is hosted at https://github.com/Topazoo/biosbench-evidence.
-A private security-reporting channel is not yet enabled; enabling GitHub private
-vulnerability reporting is proposed for owner approval. Never attach real
+Use GitHub private vulnerability reporting for security issues. Never attach real
 device reports, private paths, identifiers, settings dumps, binaries, or captured
 firmware to public issues; supply a minimal synthetic reproducer instead.

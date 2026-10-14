@@ -27,6 +27,15 @@ def load(path: Path, limit: int) -> bytes:
     return data
 
 
+def unique_object(pairs):
+    result = {}
+    for key, value in pairs:
+        if key in result:
+            raise EvidenceError("invalid", "Duplicate JSON field")
+        result[key] = value
+    return result
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest="command", required=True)
@@ -39,6 +48,12 @@ def main() -> int:
     compare.add_argument("before", type=Path)
     compare.add_argument("after", type=Path)
     compare.add_argument("--plan", type=Path, help="JSON array of [decimal_offset, old_byte, new_byte]")
+    hii = commands.add_parser("hii", help="Inspect supplied HII package/IFR structure")
+    hii.add_argument("file", type=Path)
+    hii.add_argument("--hex", action="store_true", help="Read a strict hex fixture instead of binary")
+    browser = commands.add_parser("browser", help="Compare a supplied browser-case JSON file")
+    browser.add_argument("file", type=Path)
+    browser.add_argument("--staged", action="store_true", help="Require planned staged bytes")
     args = parser.parse_args()
     try:
         if args.command == "report":
@@ -53,6 +68,22 @@ def main() -> int:
             if len(names) > 3 or len(names) != len(set(names)) or not set(names) <= set(limits):
                 raise EvidenceError("invalid", "Duplicate or unexpected companion selection")
             result = validate_bundle(raw, {p.name: load(p, limits[p.name]) for p in args.companions})
+        elif args.command == "hii":
+            from .hii import MAX_BYTES, inspect_hii
+            raw = load(args.file, MAX_BYTES * 2 + 1 if args.hex else MAX_BYTES)
+            if args.hex:
+                import re
+                text = raw.decode("ascii").removesuffix("\n")
+                if len(text) % 2 or not re.fullmatch(r"[0-9a-fA-F]+", text):
+                    raise EvidenceError("invalid", "Invalid HII hex fixture")
+                raw = bytes.fromhex(text)
+            result = {"state": "parsed", "structure": inspect_hii(raw), "semantics": "not_checked"}
+        elif args.command == "browser":
+            from .browser import decode_case, verify_browser
+            plans, observed = decode_case(json.loads(load(args.file, 5 * 1024 * 1024),
+                                                     object_pairs_hook=unique_object))
+            result = {"state": "matched", "stores": verify_browser(plans, observed, staged=args.staged),
+                      "phase": "staged" if args.staged else "baseline", "semantics": "not_checked"}
         else:
             edits = json.loads(load(args.plan, 100_000)) if args.plan else []
             if (not isinstance(edits, list) or len(edits) > 4096

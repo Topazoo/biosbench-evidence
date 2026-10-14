@@ -34,6 +34,19 @@ def expected_files() -> dict[str, bytes]:
         "after.snapshot": (snapshot + "010903\n").encode(),
         "plan.json": b"[[1, 2, 9]]\n",
     })
+    ifr = (bytes([14, 0x97]) + bytes(21) + bytes([1, 0x86, 1, 0, 2, 0])
+           + bytes([0x24, 24]) + bytes(16) + bytes([1, 0, 4, 0, 83, 0])
+           + bytes([0xEE, 2, 0x29, 2, 0x29, 2]))
+    def hii(body):
+        payload = (len(body) + 4).to_bytes(3, "little") + b"\x02" + body + b"\x04\0\0\xdf"
+        return bytes(16) + (20 + len(payload)).to_bytes(4, "little") + payload
+    files["hii-valid.hex"] = (hii(ifr).hex() + "\n").encode()
+    files["hii-invalid.hex"] = (hii(ifr + b"\x29\x02").hex() + "\n").encode()
+    baseline = {"guid": "00" * 16, "name_utf16le": "5300", "data": "00000000"}
+    for name, observed in (("baseline", baseline), ("staged", {**baseline, "data": "00050000"})):
+        case = {"version": 1, "plans": [{"baseline": baseline, "edits": [[1, 0, 5]]}],
+                "observed": [observed]}
+        files[f"browser-{name}.json"] = (json.dumps(case, indent=2, sort_keys=True) + "\n").encode()
     hashes = {name: hashlib.sha256(data).hexdigest() for name, data in sorted(files.items())}
     files["SHA256.json"] = (json.dumps(hashes, indent=2, sort_keys=True) + "\n").encode()
     return files

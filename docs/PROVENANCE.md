@@ -1,8 +1,7 @@
 # Source and dependency audit
 
 This isolated Python port was prepared from generic source components inspected
-read-only on 2026-10-14. Original source snapshots and local paths remain outside
-the repository in a private audit directory. No engineering workspace was used
+read-only on 2026-10-14. Only the generic components listed below are included. No engineering workspace was used
 as a build/test directory or modified. No archives were imported wholesale.
 
 | Original component | SHA-256 of inspected copy | Treatment |
@@ -19,14 +18,6 @@ no LICENSE, NOTICE, COPYRIGHT, or AUTHORS files outside build output. Source
 headers identify purpose, not ownership. Absence of notices does not establish
 third-party ownership. Accessible project history records Codex adding the
 bundle loader and inventory parser and editing the other project components.
-
-On 2026-10-14, Peter Swanson confirmed that the report parser, bundle loader,
-inventory parser, and snapshot-comparison components were created for his
-project, that he has authority to license their included portions without
-conflicting obligations, and that he approves MIT with Peter Swanson as the
-copyright holder. The included ports are licensed on that explicit confirmation;
-the original source manifests themselves remain unchanged. The private approval
-record is retained outside this public-source candidate.
 
 The original client uses local bridge/profile/firmware-verification crates and
 `windows-sys = 0.61.2`; its bundle hash uses Windows CNG. None is included or
