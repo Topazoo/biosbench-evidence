@@ -9,6 +9,9 @@ Licensed under the [MIT License](LICENSE), copyright 2026 Peter Swanson.
 Source: [Topazoo/biosbench-evidence](https://github.com/Topazoo/biosbench-evidence).
 See [publication status and protection proposal](docs/PUBLICATION.md).
 
+This local branch also contains a reviewed [HII/IFR and browser-buffer expansion](docs/EXPANSION.md).
+That additional scope has not yet been published.
+
 Useful for support tooling, lab automation, and tests that must distinguish
 missing evidence, partial saves, corrupt input, and unchanged snapshots.
 There is no collector or firmware writer in this project.

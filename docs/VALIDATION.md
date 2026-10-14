@@ -1,5 +1,10 @@
 # Validation record
 
+Local expansion: 34 Python test methods pass on Windows and Linux, including
+192 browser-buffer one-bit cases and HII/IFR truncation/shape/boundary tests.
+The expanded package has 41 allowlisted text files and 16 reproducible synthetic
+fixture files. Hosted CI below concerns the previously published scope only.
+
 This file records local synthetic checks only. No collector, driver, firmware,
 owner workspace test, account operation, or physical settings trial is involved.
 
