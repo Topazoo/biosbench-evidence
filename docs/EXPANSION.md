@@ -1,7 +1,6 @@
-# Local evidence expansion
+# HII/IFR and browser-buffer checks
 
-This branch adds two independent offline APIs. It is prepared for review; the
-additional scope has not been pushed or published.
+Two independent offline APIs extend report and snapshot inspection.
 
 ## HII/IFR structure
 
@@ -51,9 +50,8 @@ NVRAM state, safe callbacks, persistence, or effective hardware settings.
 
 ## Provenance and checks
 
-These are project-source adaptations under the existing MIT license and Peter's
-explicit extraction approval. They introduce no third-party dependency or copied
-vendor implementation. Original-source hashes are retained in the private audit.
+These project-source adaptations use the existing MIT license. They introduce
+no third-party dependency or copied vendor implementation.
 Existing UEFI references are format descriptions, not copied specification text.
 
 Synthetic tests exercise every fixture truncation, malformed shapes, late scope

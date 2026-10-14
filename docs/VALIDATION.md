@@ -30,8 +30,7 @@ failed because that Python patch version has no Windows build in the Actions
 manifest. The matrix now pins Python 3.12.10, verified available for Linux and
 Windows; the latest run is linked from the repository Actions tab.
 Full original-report semantic compatibility and hardware validation are not
-established by these checks. MIT authorization is recorded separately in
-PROVENANCE.md; tests are not evidence of ownership.
+established by these checks. Source and dependency provenance is recorded in PROVENANCE.md.
 
 The archive includes only allowlisted text source, tests, docs, configuration,
 and deterministic synthetic fixtures. It excludes Git history, bytecode,
