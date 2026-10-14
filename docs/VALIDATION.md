@@ -1,5 +1,30 @@
 # Validation record
 
+## Coverage and known unknowns
+
+All tests listed here use synthetic inputs. A test passing establishes the
+implemented behavior for its cases, not general firmware compatibility.
+
+| Area | Published test evidence | What remains unknown |
+| --- | --- | --- |
+| Report and bundle | `test_evidence.py`: encoding, field limits, companion declarations, missing selections, digest corruption, partial-save examples. | Unknown report-field semantics, capture freshness/authenticity, atomicity, flush/close success. |
+| Boot inventory | `test_inventory.py`: bounds, alignment, overflow, overlap, failure counts, malformed structure despite matching digest. | Whether records describe real memory/images, installed RAM, or complete real-world observations. |
+| Snapshot comparison | `test_evidence.py`: identity/attributes/length, exact plans, one-bit corruption, stale plans, declared dependency sets. | Setting meanings, undeclared dependencies, effective state, safe replay, persistence. |
+| HII/IFR structure | `test_expansion.py`: every synthetic fixture truncation, known declaration shapes, unknown packages, late scope errors, resource boundaries. | Expression/callback behavior, vendor extensions, full UEFI revision conformance, firmware identity. |
+| Browser buffers | `test_expansion.py`: both phases, 192 one-bit cases, reordered/missing/duplicate/extra dependencies, malformed plans and JSON. | Provider/session ownership, freshness, atomicity, NVRAM state, callbacks and hardware effects. |
+| CLI and packaging | CLI tests, reproducible synthetic fixtures, explicit file allowlist, syntax/format checks, deterministic archive build. | Compatibility beyond tested environments; the limited privacy scan cannot detect every private identifier. |
+| Emulator observations | No emulator run is part of this package's recorded validation. | Emulator-specific behavior and transfer to physical machines. |
+| Physical validation | No physical settings trial is part of this package's recorded validation. | Board/BIOS compatibility, reboot persistence, effective hardware behavior and safety. |
+
+Test sources: [report/snapshot/CLI](../tests/test_evidence.py),
+[inventories](../tests/test_inventory.py), and
+[HII/browser](../tests/test_expansion.py). See the
+[evidence-level guide](../README.md#what-the-evidence-establishes) when interpreting
+results. Emulator observations and physical trials would need separately
+identified environments, methods, and results before supporting new claims.
+
+## Recorded runs
+
 Local expansion: 34 Python test methods pass on Windows and Linux, including
 192 browser-buffer one-bit cases and HII/IFR truncation/shape/boundary tests.
 The expanded package has 41 allowlisted text files and 16 reproducible synthetic
