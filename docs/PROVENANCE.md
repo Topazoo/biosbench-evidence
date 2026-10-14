@@ -1,5 +1,18 @@
 # Source and dependency audit
 
+## Consolidated public examples
+
+The standalone MIT-licensed Rust failure examples now live under
+[`examples/failure-examples/`](../examples/failure-examples/README.md).
+They were imported only from the previously published repository at commit
+`6e4d801e354bd0ec2dad27d9ba30b005db4f6709`. Their license, source/test bytes, and
+original extraction record are retained; the
+[migration record](../examples/failure-examples/docs/SCOPE.md#public-repository-consolidation)
+links the original public history and lists integration changes.
+There are no third-party Rust crates or Python runtime dependencies.
+
+## Python extraction audit
+
 This isolated Python port was prepared from generic source components inspected
 read-only on 2026-10-14. Only the generic components listed below are included. No engineering workspace was used
 as a build/test directory or modified. No archives were imported wholesale.

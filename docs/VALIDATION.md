@@ -13,6 +13,7 @@ implemented behavior for its cases, not general firmware compatibility.
 | HII/IFR structure | `test_expansion.py`: every synthetic fixture truncation, known declaration shapes, unknown packages, late scope errors, resource boundaries. | Expression/callback behavior, vendor extensions, full UEFI revision conformance, firmware identity. |
 | Browser buffers | `test_expansion.py`: both phases, 192 one-bit cases, reordered/missing/duplicate/extra dependencies, malformed plans and JSON. | Provider/session ownership, freshness, atomicity, NVRAM state, callbacks and hardware effects. |
 | CLI and packaging | CLI tests, reproducible synthetic fixtures, explicit file allowlist, syntax/format checks, deterministic archive build. | Compatibility beyond tested environments; the limited privacy scan cannot detect every private identifier. |
+| Rust failure examples | 8 one-use/session tests and 6 save-fault tests; Cargo and direct compiler runner. Sources and tests retain their published bytes. | Concurrent writers, actual UEFI behavior, durability, power loss, authentication, and physical effects are not modeled. |
 | Emulator observations | No emulator run is part of this package's recorded validation. | Emulator-specific behavior and transfer to physical machines. |
 | Physical validation | No physical settings trial is part of this package's recorded validation. | Board/BIOS compatibility, reboot persistence, effective hardware behavior and safety. |
 
@@ -24,6 +25,14 @@ results. Emulator observations and physical trials would need separately
 identified environments, methods, and results before supporting new claims.
 
 ## Recorded runs
+
+The consolidated workflow runs separate Rust and Python jobs on Linux and
+Windows. Rust uses 1.99.0; Python uses 3.12.10. Existing required Python `test`
+jobs depend on both Rust matrix jobs, so either language's failures block merge
+without changing branch protections. The root allowlist now covers 57 text
+files, including the 16-file standalone Rust package. The 16 Python synthetic
+fixtures are unchanged. The historical counts below describe earlier scopes.
+See [Rust provenance and historical validation](../examples/failure-examples/docs/SCOPE.md).
 
 Local expansion: 34 Python test methods pass on Windows and Linux, including
 192 browser-buffer one-bit cases and HII/IFR truncation/shape/boundary tests.

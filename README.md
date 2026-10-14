@@ -1,10 +1,18 @@
 # BiosBench Evidence
 
-Python library and CLI for understanding and checking saved firmware evidence.
-The current release supports offline inspection and comparison. Use it in
+BiosBench brings together a Python evidence library/CLI and host-only Rust
+failure examples for developers working with firmware evidence. The current
+release supports offline inspection, comparison, and synthetic fault tests. Use it in
 support tooling, lab automation, or regression tests to distinguish missing
 inputs, partial saves, invalid evidence, and exact byte matches. Python 3.12+
-and its standard library are the only runtime requirements.
+and its standard library are the Python runtime requirements. The optional Rust
+examples need a Rust compiler and host linker; neither package depends on the other.
+
+| Developer task | Component | Start here |
+| --- | --- | --- |
+| Inspect saved evidence or compare supplied bytes | Python library and CLI in `biosbench_evidence/` | [Quick start](#quick-start) |
+| Exercise save failures, one-use operations, and terminal sessions | Rust crate in `examples/failure-examples/` | [Rust examples](#rust-failure-examples) |
+| Understand supported formats and evidence limits | Reference and validation docs | [Formats](docs/FORMATS.md), [validation](docs/VALIDATION.md) |
 
 Licensed under [MIT](LICENSE), copyright 2026 Peter Swanson. See the scoped
 [source and dependency audit](docs/PROVENANCE.md) and
@@ -37,6 +45,7 @@ for supported versions, inputs, outputs, and known unknowns.
 | --- | --- | --- |
 | Decoded structure | Bounded report/inventory parsing and selected HII/IFR framing and declarations. | Supplied bytes meet the implemented structural rules; firmware behavior and setting meanings remain unverified. |
 | Exact byte comparison | Digest links and snapshot/browser comparisons, exercised with synthetic fixtures. | Selected bytes agree with a digest, baseline, or explicit plan; this does not establish authenticity or effective state. |
+| Synthetic control-flow tests | Rust save routine exercised against an in-memory API double; one-use and session tests. | Injected outcomes establish behavior in the harness, not durable writes, firmware behavior, or hardware authorization. |
 | Emulator observation | No emulator validation is recorded for this package. | An emulator result would describe that environment and scenario; it would not by itself validate a physical machine. |
 | Physical validation | No physical settings trial is recorded for this package. | Hardware behavior, persistence, and safety are not established by these checks. |
 
@@ -46,7 +55,7 @@ comparison does not become an emulator or physical result. See
 
 ## Quick start
 
-Open a terminal in this repository. No installation or network is needed.
+Open a terminal in this repository with Python available. No package installation or network is needed.
 Every example below uses synthetic fixtures and should exit successfully.
 
 Parse a report, then check its explicitly selected companion files:
@@ -136,9 +145,31 @@ and an explicit text-file allowlist. The archive builder writes a deterministic
 source ZIP and SHA-256 under `dist/`. CI uses pinned actions and Python 3.12.10
 on Linux and Windows; see [validation scope](docs/VALIDATION.md).
 
-The companion [BiosBench Failure Examples](https://github.com/Topazoo/biosbench-failure-examples)
-contains reusable host-only save-fault, one-use, and session examples. It is
-a separate package, not a runtime dependency.
+## Rust failure examples
+
+The [standalone Rust crate](examples/failure-examples/) contains reusable
+save-fault, one-use, and session examples. With Rust 1.80+ and a host linker
+already installed, run from this repository root:
+
+```console
+cargo test --manifest-path examples/failure-examples/Cargo.toml --locked --offline
+python examples/failure-examples/tools/check_package.py
+python examples/failure-examples/tools/build_archive.py
+```
+
+CI validates Rust 1.99.0 on Linux and Windows; the declared minimum Rust version
+has not been independently tested. The crate has no third-party dependencies
+and remains `publish = false`. All 14 Rust tests use in-memory synthetic data.
+The production-derived save routine is compiled only by its API double and is
+not an exported filesystem backend. Simulated flush/cleanup outcomes do not
+establish durability, and session/one-use mechanisms do not authorize hardware
+operations. See [example details](examples/failure-examples/README.md) and
+[source history and limits](examples/failure-examples/docs/SCOPE.md).
+
+Python and Rust have separate Linux/Windows CI jobs. The existing required
+`test` jobs run Python checks after both `rust` jobs succeed, preserving the
+merge gate for both languages. The root source archive includes both packages;
+the example's archive contains only the standalone Rust package.
 
 See [formats](docs/FORMATS.md), [fault cases](docs/FAULTS.md), and
 [input handling and disclosure](SECURITY.md). Source packages exclude real
