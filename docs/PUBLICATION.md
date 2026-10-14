@@ -19,6 +19,13 @@ Source provenance and dependency boundaries are recorded in PROVENANCE.md.
 
 ## Validation and limits
 
+The consolidated workflow preserves the required `test (ubuntu-latest)` and
+`test (windows-latest)` check names and their existing protection settings.
+Those Python jobs depend on both separate Rust jobs. Rust tests and package
+checks must therefore succeed before the required checks can pass.
+The unified archive includes `examples/failure-examples/`; its standalone
+archive remains available from that directory's build script.
+
 CI pins Python 3.12.10 on Linux and Windows, runs synthetic tests and repository
 checks, and builds a deterministic source archive. See the Actions tab for
 commit-specific results. The initial Python 3.12.14 Windows installation failure

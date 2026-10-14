@@ -3,6 +3,7 @@
 import ast
 from pathlib import Path
 import re
+import runpy
 
 from generate_fixtures import expected_files
 
@@ -22,14 +23,16 @@ SOURCE_FILES = (
 
 
 def allowed_files() -> list[str]:
-    return sorted([*SOURCE_FILES, *("fixtures/" + name for name in expected_files())])
+    examples = runpy.run_path(str(ROOT / "examples/failure-examples/tools/check_package.py"))
+    return sorted([*SOURCE_FILES, *("fixtures/" + name for name in expected_files()),
+                   *("examples/failure-examples/" + name for name in examples["FILES"])])
 
 
 def check() -> None:
     expected = set(allowed_files())
     actual = {
         file.relative_to(ROOT).as_posix() for file in ROOT.rglob("*")
-        if file.is_file() and not any(part in {".git", "dist", "__pycache__", ".venv"}
+        if file.is_file() and not any(part in {".git", "dist", "target", "__pycache__", ".venv"}
                                       for part in file.relative_to(ROOT).parts)
     }
     if actual != expected:
@@ -46,7 +49,8 @@ def check() -> None:
         # This catches common accidental local paths, not all sensitive data.
         private_pattern = r"[A-Za-z]:\\|/" + r"Users/|/" + r"home/|app\.slack\.com|BEGIN " + r".*PRIVATE KEY"
         # The scanner contains its own illustrative detection expressions.
-        if name != "tools/check_repository.py" and re.search(private_pattern, text):
+        scanners = {"tools/check_repository.py", "examples/failure-examples/tools/check_package.py"}
+        if name not in scanners and re.search(private_pattern, text):
             raise ValueError(f"Potential private material: {name}")
     for name, data in expected_files().items():
         if (ROOT / "fixtures" / name).read_bytes() != data:
